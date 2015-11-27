@@ -9,8 +9,13 @@ public class towerMain {
 			if (System.nanoTime()/Math.pow(10,9)-nanoTime/Math.pow(10,9)>=1/60){			
 			nanoTime=System.nanoTime();
 			
+<<<<<<< HEAD
 			f
 			
+=======
+			
+			l
+>>>>>>> origin/master
 			
 		}
 		//System.out.println(System.nanoTime()/Math.pow(10,9)+":"+(nanoTime/Math.pow(10,9)));
