@@ -10,7 +10,7 @@ public class towerMain {
 			nanoTime=System.nanoTime();
 			
 			
-			
+			l
 			
 		}
 		//System.out.println(System.nanoTime()/Math.pow(10,9)+":"+(nanoTime/Math.pow(10,9)));
