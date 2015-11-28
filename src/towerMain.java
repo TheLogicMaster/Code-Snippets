@@ -18,7 +18,7 @@ public class towerMain implements Runnable {
 	public void run() {
 		long now = System.currentTimeMillis();
 		while(running == true){
-			if (System.currentTimeMillis() / 1000 - now / 1000 >= 1/60) {
+			if (System.currentTimeMillis() - now >= 17) {
 			tick();
 			now = System.currentTimeMillis();
 
