@@ -12,18 +12,11 @@ import javax.swing.JPanel;
 public class DrawGraphics extends JPanel {
 	private static final long serialVersionUID = 3848437928663433161L;
 	
-	public static int picx  = 0;
-	public static int picy  = 0;
+	public static int x  = 0;
+	public static int y  = 0;
 	public static int xvel  = 0;
 	public static int yvel  = 0;
 	
-	public static int mcount;
-	public static double x = 0;
-	public static double y = 0;
-	static int count = 0;
-	public static int speed = 10;
-	public static double rad = Math.toRadians(Math.random() * 360);
-
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		BufferedImage img = null;
@@ -35,14 +28,14 @@ public class DrawGraphics extends JPanel {
 		}
 
 		g2d.setColor(new Color(0, 0, 0));
-		g2d.drawImage(img, (int) x, (int) y, null);
+		g2d.drawImage(img, x, y, null);
 
 	}
 
 	public void tick() {
-		picx  += xvel;
-		picy  += yvel;
-		
+		x  += xvel;
+		y  += yvel;
+		System.out.println(xvel + ";" + yvel);
 	}
 	
 	public DrawGraphics() {
@@ -78,7 +71,6 @@ public class DrawGraphics extends JPanel {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				int key = e.getKeyCode();
-				System.out.println(e);
 				if(key == KeyEvent.VK_RIGHT) {
 					DrawGraphics.xvel = 0;
 					
@@ -112,61 +104,7 @@ public class DrawGraphics extends JPanel {
 		};
 		addKeyListener(listener);
 		setFocusable(true);
-
-	}
-	
-		if (count >= 10000) {
-			count = 0;
-			if (x + Math.cos(rad) >= 1000) {
-				if (Math.toDegrees(rad) == 90 || Math.toDegrees(rad) == 90) {
-					rad = Math.toRadians(270);
-				}
-				if (Math.toDegrees(rad) > 90) {
-					rad = Math.toRadians(90 - (Math.toDegrees(rad) - 90));
-				}
-				if (Math.toDegrees(rad) < 90) {
-					rad = Math.toRadians(90 + (90 - Math.toDegrees(rad)));
-				}
-			}
-			if (x + Math.cos(rad) <= 0) {
-				if (Math.toDegrees(rad) == 270 || Math.toDegrees(rad) == 270) {
-					rad = Math.toRadians(90);
-				}
-				if (Math.toDegrees(rad) > 270) {
-					rad = Math.toRadians(270 - (Math.toDegrees(rad) - 270));
-				}
-				if (Math.toDegrees(rad) < 90) {
-					rad = Math.toRadians(270 + (270 - Math.toDegrees(rad)));
-				}
-			}
-			if (y + Math.sin(rad) >= 500) {
-				if (Math.toDegrees(rad) == 180 || Math.toDegrees(rad) == 180) {
-					rad = Math.toRadians(360);
-				}
-				if (Math.toDegrees(rad) > 180) {
-					rad = Math.toRadians(180 + (Math.toDegrees(rad) - 180));
-				}
-				if (Math.toDegrees(rad) < 180) {
-					rad = Math.toRadians(180 + (180 - Math.toDegrees(rad)));
-				}
-			}
-			if (y + Math.sin(rad) <= 0) {
-				if (Math.toDegrees(rad) == 0 || Math.toDegrees(rad) == 360) {
-					rad = Math.toRadians(180);
-				}
-				if (Math.toDegrees(rad) < 0) {
-					rad = Math.toRadians(0 - (Math.toDegrees(rad) - 0));
-				}
-				if (Math.toDegrees(rad) > 0) {
-					rad = Math.toRadians(0 + (0 - Math.toDegrees(rad)));
-				}
-			}
-			x = x + Math.cos(rad);
-			y = y + Math.sin(rad);
-			System.out.println((x) + ":x:" + (rad));
-			System.out.println((y) + ":y:" + (Math.toDegrees(rad)));
-		}
-		count += 1;
+		
 	}
 
 }
