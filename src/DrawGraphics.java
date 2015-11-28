@@ -28,6 +28,7 @@ public class DrawGraphics extends JPanel {
 		}
 
 		g2d.setColor(new Color(0, 0, 0));
+		g2d.drawLine(300, 0, 300, 1080);
 		g2d.drawImage(img, x, y, null);
 
 	}
@@ -35,7 +36,6 @@ public class DrawGraphics extends JPanel {
 	public void tick() {
 		x  += xvel;
 		y  += yvel;
-		System.out.println(xvel + ";" + yvel);
 	}
 	
 	public DrawGraphics() {

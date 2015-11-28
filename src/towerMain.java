@@ -21,7 +21,9 @@ public class towerMain implements Runnable {
 		pathGenerator pathgenerator = new pathGenerator();
 		pathgenerator.curveGen(50, 50, 100, 50, 100, 100, 30);
 		while (running == true) {
+			
 			if (System.currentTimeMillis() - before >= 17) {
+				System.out.println(System.currentTimeMillis() - before);
 				tick();
 				before = System.currentTimeMillis();
 
