@@ -18,9 +18,9 @@ public class towerMain implements Runnable {
 	public void run() {
 		long now = System.currentTimeMillis();
 		while(running == true){
-			if (System.nanoTime() / 1000 - now / 1000 >= 1/60) {
+			if (System.currentTimeMillis() / 1000 - now / 1000 >= 1/60) {
 			tick();
-			now = System.nanoTime();
+			now = System.currentTimeMillis();
 
 			}
 			
@@ -30,6 +30,7 @@ public class towerMain implements Runnable {
 		
 	public void tick() {
 		drawgraphics.tick();
+		createwindow.frame.repaint();
 		
 	}
 	
