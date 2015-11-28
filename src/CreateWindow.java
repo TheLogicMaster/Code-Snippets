@@ -11,11 +11,12 @@ public class CreateWindow {
 		int width = (int)screenSize.getWidth();
 		int height = (int)screenSize.getHeight();
 		System.out.println(width + ", " + height);
-		frame.setSize(new Dimension(width, height));
+		frame.setPreferredSize(new Dimension(width, height));
 		
 
 		DrawGraphics drawgraphics = new DrawGraphics();
 		frame.add(drawgraphics);
+		frame.pack();
 		frame.setVisible(true);
 		
 		
