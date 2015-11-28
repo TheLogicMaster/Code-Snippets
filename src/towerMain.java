@@ -1,9 +1,9 @@
 
 public class towerMain implements Runnable {	
-	DrawGraphics drawgraphics = new DrawGraphics();
+	static DrawGraphics drawgraphics = new DrawGraphics();
+	static CreateWindow createwindow = new CreateWindow();
 	boolean running = true;
 	public static void main(String[] args) {
-		CreateWindow createwindow = new CreateWindow();
 		createwindow.makeWindow();
 		
 		start();
@@ -30,7 +30,6 @@ public class towerMain implements Runnable {
 		
 	public void tick() {
 		drawgraphics.tick();
-		drawgraphics.repaint();
 		
 	}
 	
