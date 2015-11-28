@@ -15,10 +15,10 @@ public class DrawGraphics extends JPanel {
 		
 	}
 	
-	public void tick(Graphics2D g2d) {
-		x += 5;
-		y += 5;
-		g2d.fillRect(x, y, x + 5, y + 5);
+	public void tick(Graphics graphics) {
+		x = 5;
+		y = 5;
+		graphics.fillRect(5, 5, 5 + 5, 5 + 5);
 		
 	}
 	

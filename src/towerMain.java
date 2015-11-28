@@ -8,16 +8,6 @@ public class towerMain implements Runnable {
 		
 		start();
 	
-<<<<<<< HEAD
-		while(gameLoop==1){
-			if (System.nanoTime()/Math.pow(10,9)-nanoTime/Math.pow(10,9)>=1/60){			
-			nanoTime=System.nanoTime();
-	
-		}
-=======
-		
->>>>>>> origin/master
-		//System.out.println(System.nanoTime()/Math.pow(10,9)+":"+(nanoTime/Math.pow(10,9)));
 	}
 		
 	public synchronized static void start() {
@@ -36,7 +26,7 @@ public class towerMain implements Runnable {
 		long now = System.currentTimeMillis();
 		while(running == true){
 			if (System.nanoTime() / 1000 - now / 1000 >= 1/60){
-			drawgraphics.tick((Graphics2D)drawgraphics.getGraphics());
+			drawgraphics.tick(drawgraphics.getGraphics());
 			System.out.println("test");
 			now = System.nanoTime();
 
