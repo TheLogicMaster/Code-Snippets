@@ -13,7 +13,8 @@ public class pathGenerator {
 		double op1y = p2y + Math.sin(rad1) * cdist;
 		double op2x = p2x + Math.cos(rad2) * cdist;
 		double op2y = p2y + Math.sin(rad2) * cdist;
-		System.out.println((op1x) + ":" + (op1y) + ":" + (op2x) + ":" + (op2y));
+		int orad = 4;
+		//System.out.println((op1x) + ":" + (op1y) + ":" + (op2x) + ":" + (op2y));
 	}
 
 }
