@@ -19,19 +19,10 @@ public class DrawGraphics extends JPanel {
 		
 	}
 	
-<<<<<<< HEAD
-	
 	public void tick() {
 		x = (int)(Math.random() * 1000);
 		y = (int)(Math.random() * 1000);
 		repaint();
-		
-=======
-	public void tick(Graphics graphics) {
-		x += 5;
-		y += 5;
-		graphics.fillRect(x, y, x + 5, y + 5);
->>>>>>> origin/master
 		
 	}
 	
