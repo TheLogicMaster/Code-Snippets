@@ -17,20 +17,13 @@ public class towerMain implements Runnable {
 
 	@Override
 	public void run() {
-		long now = System.currentTimeMillis();
-<<<<<<< HEAD
+		long before = System.currentTimeMillis();
 		pathGenerator pathgenerator = new pathGenerator();
 		pathgenerator.curveGen(50, 50, 100, 50, 100, 100, 30);
 		while (running == true) {
-			if (System.nanoTime() / 1000 - now / 1000 >= 1 / 60) {
+			if (System.currentTimeMillis() / 1000 - before / 1000 >= 1/60) {
 				tick();
-				now = System.nanoTime();
-=======
-		while(running == true){
-			if (System.currentTimeMillis() / 1000 - now / 1000 >= 1/60) {
-			tick();
-			now = System.currentTimeMillis();
->>>>>>> origin/master
+				before = System.currentTimeMillis();
 
 			}
 
@@ -40,12 +33,8 @@ public class towerMain implements Runnable {
 
 	public void tick() {
 		drawgraphics.tick();
-<<<<<<< HEAD
-
-=======
 		createwindow.frame.repaint();
-		
->>>>>>> origin/master
+
 	}
 
 }
