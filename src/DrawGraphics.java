@@ -80,8 +80,8 @@ public class DrawGraphics extends JPanel {
 			}
 			x = x + Math.cos(rad);
 			y = y + Math.sin(rad);
-			System.out.println((x) + ":x:" + (rad));
-			System.out.println((y) + ":y:" + (Math.toDegrees(rad)));
+			//System.out.println((x) + ":x:" + (rad));
+			//System.out.println((y) + ":y:" + (Math.toDegrees(rad)));
 		}
 		count += 1;
 	}
