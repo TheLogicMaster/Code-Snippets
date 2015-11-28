@@ -2,6 +2,8 @@
 public class towerMain {
 
 	public static void main(String[] args) {
+		CreateWindow createwindow = new CreateWindow();
+		createwindow.makeWindow();
 		int gameLoop=1;
 		long nanoTime=System.nanoTime();
 	
@@ -14,7 +16,11 @@ public class towerMain {
 			
 =======
 			
+<<<<<<< HEAD
 			l
+>>>>>>> origin/master
+=======
+			
 >>>>>>> origin/master
 			
 		}
