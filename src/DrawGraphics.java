@@ -11,14 +11,12 @@ import javax.swing.JPanel;
 
 public class DrawGraphics extends JPanel {
 	private static final long serialVersionUID = 3848437928663433161L;
-<<<<<<< HEAD
 	
-	public static int x  = 0;
-	public static int y  = 0;
+	public static int picx  = 0;
+	public static int picy  = 0;
 	public static int xvel  = 0;
 	public static int yvel  = 0;
 	
-=======
 	public static int mcount;
 	public static double x = 0;
 	public static double y = 0;
@@ -26,7 +24,6 @@ public class DrawGraphics extends JPanel {
 	public static int speed = 10;
 	public static double rad = Math.toRadians(Math.random() * 360);
 
->>>>>>> origin/master
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		BufferedImage img = null;
@@ -43,9 +40,8 @@ public class DrawGraphics extends JPanel {
 	}
 
 	public void tick() {
-<<<<<<< HEAD
-		x  += xvel;
-		y  += yvel;
+		picx  += xvel;
+		picy  += yvel;
 		
 	}
 	
@@ -119,7 +115,6 @@ public class DrawGraphics extends JPanel {
 
 	}
 	
-=======
 		if (count >= 10000) {
 			count = 0;
 			if (x + Math.cos(rad) >= 1000) {
@@ -173,5 +168,5 @@ public class DrawGraphics extends JPanel {
 		}
 		count += 1;
 	}
->>>>>>> origin/master
+
 }
