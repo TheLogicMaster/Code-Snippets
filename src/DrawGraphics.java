@@ -16,9 +16,9 @@ public class DrawGraphics extends JPanel {
 	}
 	
 	public void tick(Graphics graphics) {
-		x = 5;
-		y = 5;
-		graphics.fillRect(5, 5, 5 + 5, 5 + 5);
+		x += 5;
+		y += 5;
+		graphics.fillRect(x, y, x + 5, y + 5);
 		
 	}
 	
