@@ -7,7 +7,11 @@ public class towerMain implements Runnable {
 		createwindow.makeWindow();
 		
 		start();
+<<<<<<< HEAD
 		//System.out.println(System.nanoTime()/Math.pow(10,9)+":"+(nanoTime/Math.pow(10,9)));
+=======
+	
+>>>>>>> origin/master
 	}
 	
 	public synchronized static void start() {
@@ -18,8 +22,14 @@ public class towerMain implements Runnable {
 	public void run() {
 		long now = System.currentTimeMillis();
 		while(running == true){
+<<<<<<< HEAD
 			if (System.nanoTime() / 1000 - now / 1000 >= 1/60) {
 			tick();
+=======
+			if (System.nanoTime() / 1000 - now / 1000 >= 1/60){
+			drawgraphics.tick(drawgraphics.getGraphics());
+			System.out.println("test");
+>>>>>>> origin/master
 			now = System.nanoTime();
 
 			}
