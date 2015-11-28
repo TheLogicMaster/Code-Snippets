@@ -10,13 +10,12 @@ public class CreateWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		int width = (int)screenSize.getWidth();
 		int height = (int)screenSize.getHeight();
-		frame.setPreferredSize(new Dimension(1920, 1080));
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		System.out.println(width + ", " + height);
 		
 		DrawGraphics drawgraphics = new DrawGraphics();
 		frame.add(drawgraphics);
 		frame.setVisible(true);
-		frame.pack();
 		
 	}
 	
