@@ -6,7 +6,7 @@ public class towerMain implements Runnable {
 
 	public static void main(String[] args) {
 		createwindow.makeWindow();
-
+		
 		start();
 
 	}
@@ -23,7 +23,7 @@ public class towerMain implements Runnable {
 		while (running == true) {
 			
 			if (System.currentTimeMillis() - before >= 17) {
-				tick();
+				if(DrawGraphics.gameover == false) tick();
 				before = System.currentTimeMillis();
 
 			}

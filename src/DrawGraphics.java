@@ -1,6 +1,7 @@
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;
@@ -38,6 +39,14 @@ public class DrawGraphics extends JPanel {
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		BufferedImage img = null;
+		Font font = null;
+		try {
+			font = Font.createFont(Font.TRUETYPE_FONT, new File("resources/centurygothic.ttf"));
+		}	catch(IOException|FontFormatException e) {
+				
+			}
+		Font font15 = font.deriveFont(Font.PLAIN, 15);
+		Font font25 = font.deriveFont(Font.PLAIN, 25);
 		
 		try {
 			img = ImageIO.read(new File("resources/thing.png"));
@@ -61,46 +70,49 @@ public class DrawGraphics extends JPanel {
 		g2d.setColor(new Color(255, 255, 255));
 		g2d.drawLine(mousexnow, mouseynow  - 24 - 15, mousexnow, mouseynow  - 24 + 15);
 		g2d.drawLine(mousexnow - 15, mouseynow  - 24, mousexnow + 15, mouseynow  - 24);
-		g2d.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+		g2d.setFont(font15);
 		g2d.drawString("Health: " + health, 5, 20);
 		g2d.drawString("Score: " + score, 5, 35);
 		if(health == 0) gameover = true;
 		if(gameover) {
+			g2d.drawLine(1920 / 2, 0, 1920 / 2, 1080);
 			g2d.setColor(new Color(0, 0, 0));
 			g2d.fillRect(0, 0, CreateWindow.width, CreateWindow.height);
 			g2d.setColor(new Color(255, 255, 255));
 			g2d.setFont(new Font("Impact", Font.PLAIN, 60));
-			g2d.drawString("GAME OVER", CreateWindow.width / 4, CreateWindow.height / 4);
-			g2d.setFont(new Font("Century Gothic", Font.PLAIN, 25));
-			g2d.drawString("Score: " + score, CreateWindow.width / 4, CreateWindow.height / 4 + 65);
-			
-		}
+			g2d.drawString("GAME OVER", CreateWindow.width / 2 - 140, CreateWindow.height / 4);
+			g2d.setFont(font25);
+			g2d.drawString("Score: " + score, CreateWindow.width / 2 - 50, CreateWindow.height / 4 + 65);
 		
-		if(click && gameover == false) {
-			click = false;
-			Projectile projectile = new Projectile();
-			projectiles.add(projectile);
-			projectile.spawnProjectile(mousex, mousey, x, y, false);
-			
 		}
-		for(int i = 0; i < projectiles.size(); i++) {
-			if(projectiles.get(i).x < CreateWindow.width + projectiles.get(i).size + 5 && projectiles.get(i).x > 0 - projectiles.get(i).size - 5 && projectiles.get(i).y < CreateWindow.height + projectiles.get(i).size + 5 && projectiles.get(i).y > 0 - projectiles.get(i).size - 5) {
-				projectiles.get(i).tick(g2d);
-				
-			}	else {
-					projectiles.remove(i);
-					
-				}
-			
-			if(projectiles.get(i).x + projectiles.get(i).size / 2 < x + playerw + projectiles.get(i).size / 2 && projectiles.get(i).x + projectiles.get(i).size / 2 > x - projectiles.get(i).size / 2 && projectiles.get(i).y < y + playerh + projectiles.get(i).size / 2 && projectiles.get(i).y > y - projectiles.get(i).size / 2 && projectiles.get(i).isEnemy) {
-				projectiles.remove(i);
-				health -= 5;
+		if(gameover == false) {
+			if(click) {
+				click = false;
+				Projectile projectile = new Projectile();
+				projectiles.add(projectile);
+				projectile.spawnProjectile(mousex, mousey, x, y, false);
 				
 			}
-			
-			if(projectiles.get(i).x + projectiles.get(i).size / 2 < Enemy.x + Enemy.size + projectiles.get(i).size / 2 && projectiles.get(i).x + projectiles.get(i).size / 2 > Enemy.x - projectiles.get(i).size / 2 && projectiles.get(i).y < Enemy.y + Enemy.size + projectiles.get(i).size / 2 && projectiles.get(i).y > Enemy.y - projectiles.get(i).size / 2 && projectiles.get(i).isEnemy == false) {
-				projectiles.remove(i);
-				score += 5;
+			for(int i = 0; i < projectiles.size(); i++) {
+				if(projectiles.get(i).x < CreateWindow.width + projectiles.get(i).size + 5 && projectiles.get(i).x > 0 - projectiles.get(i).size - 5 && projectiles.get(i).y < CreateWindow.height + projectiles.get(i).size + 5 && projectiles.get(i).y > 0 - projectiles.get(i).size - 5) {
+					projectiles.get(i).tick(g2d);
+					
+				}	else {
+						projectiles.remove(i);
+						
+					}
+				
+				if(projectiles.get(i).x + projectiles.get(i).size / 2 < x + playerw + projectiles.get(i).size / 2 && projectiles.get(i).x + projectiles.get(i).size / 2 > x - projectiles.get(i).size / 2 && projectiles.get(i).y < y + playerh + projectiles.get(i).size / 2 && projectiles.get(i).y > y - projectiles.get(i).size / 2 && projectiles.get(i).isEnemy) {
+					projectiles.remove(i);
+					health -= 5;
+					
+				}
+				
+				if(projectiles.get(i).x + projectiles.get(i).size / 2 < Enemy.x + Enemy.size + projectiles.get(i).size / 2 && projectiles.get(i).x + projectiles.get(i).size / 2 > Enemy.x - projectiles.get(i).size / 2 && projectiles.get(i).y < Enemy.y + Enemy.size + projectiles.get(i).size / 2 && projectiles.get(i).y > Enemy.y - projectiles.get(i).size / 2 && projectiles.get(i).isEnemy == false) {
+					projectiles.remove(i);
+					score += 5;
+					
+				}
 				
 			}
 			
