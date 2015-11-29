@@ -11,6 +11,8 @@ public class Projectile {
 	double y = 0;
 	double size = 50;
 	double speed = 10;
+	double color = 255;
+	double colvel = 2;
 	
 	public void spawnProjectile(int mousex, int mousey, int playerx, int playery) {
 		this.slopex = (mousex - this.size / 2) - (playerx + DrawGraphics.imgw / 2 - size / 2);
@@ -28,10 +30,16 @@ public class Projectile {
 	}
 	
 	public void tick(Graphics2D g2d) {
-		g2d.setColor(new Color(255, 0, 0));
+		g2d.setColor(new Color((int)(this.color), (int)(this.color) - 149, 0));
+		if(color >= 255) {
+			colvel = -2;
+		}	else if(color <= 150) {
+				colvel = 2;
+			}
+		color += colvel;
 		this.x += this.xvel;
 		this.y += this.yvel;
-		g2d.fillRect((int)this.x, (int)this.y, (int)size, (int)size);
+		g2d.fillOval((int)this.x, (int)this.y, (int)size, (int)size);
 		
 	}
 	
