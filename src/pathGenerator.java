@@ -14,6 +14,7 @@ public class pathGenerator {
 		double irad1_1 = Math.atan2(op1y, op1x) - vrad;
 		double irad1_2 = Math.atan2(op2y, op2x) - vrad;;
 		double irad2 = Math.abs(irad1_1 - irad1_2);
+		if ()
 		double cp1x = Math.cos(-irad2) * vpdist;
 		double cp1y = Math.sin(-irad2) * vpdist + vdist;
 		double cp2x = Math.cos(irad2) * vpdist;
