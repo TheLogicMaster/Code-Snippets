@@ -144,9 +144,6 @@ public class DrawGraphics extends JPanel {
 		MouseListener mouselistener = new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				mousex = (int)MouseInfo.getPointerInfo().getLocation().getX();
-				mousey = (int)MouseInfo.getPointerInfo().getLocation().getY();
-				click = true;
 				
 			}
 
@@ -170,8 +167,10 @@ public class DrawGraphics extends JPanel {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+				mousex = (int)MouseInfo.getPointerInfo().getLocation().getX();
+				mousey = (int)MouseInfo.getPointerInfo().getLocation().getY();
+				click = true;
+								
 			}
 			
 		};
