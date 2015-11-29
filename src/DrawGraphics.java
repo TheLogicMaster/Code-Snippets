@@ -1,5 +1,6 @@
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;
@@ -30,6 +31,7 @@ public class DrawGraphics extends JPanel {
 	public static int mousexnow = 0;
 	public static int mouseynow = 0;
 	public static LinkedList<Projectile> projectiles = new LinkedList<Projectile>();
+	public static int health = 100;
 	
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
@@ -41,8 +43,8 @@ public class DrawGraphics extends JPanel {
 			e.printStackTrace();
 		}
 		
-		playerw = 100;
-		playerh = 100;
+		playerw = 50;
+		playerh = 50;
 		
 		g2d.setStroke(new BasicStroke(3));
 		g2d.setColor(new Color(0, 0, 0));
@@ -52,16 +54,19 @@ public class DrawGraphics extends JPanel {
 		g2d.setColor(new Color(0, 0, 255));
 		mousexnow = (int)MouseInfo.getPointerInfo().getLocation().getX();
 		mouseynow = (int)MouseInfo.getPointerInfo().getLocation().getY();
+		Enemy.drawEnemy(g2d);
 		g2d.setStroke(new BasicStroke(3));
 		g2d.setColor(new Color(255, 255, 255));
 		g2d.drawLine(mousexnow, mouseynow  - 24 - 15, mousexnow, mouseynow  - 24 + 15);
 		g2d.drawLine(mousexnow - 15, mouseynow  - 24, mousexnow + 15, mouseynow  - 24);
+		g2d.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+		g2d.drawString("Health: " + health, 5, 20);
 		
 		if(click) {
 			click = false;
 			Projectile projectile = new Projectile();
 			projectiles.add(projectile);
-			projectile.spawnProjectile(mousex, mousey, x, y);
+			projectile.spawnProjectile(mousex, mousey, x, y, false);
 			
 		}
 		for(int i = 0; i < projectiles.size(); i++) {
@@ -72,6 +77,12 @@ public class DrawGraphics extends JPanel {
 					projectiles.remove(i);
 					
 				}
+			
+			if(projectiles.get(i).x + projectiles.get(i).size / 2 < x + playerw + projectiles.get(i).size / 2 && projectiles.get(i).x + projectiles.get(i).size / 2 > x - projectiles.get(i).size / 2 && projectiles.get(i).y < y + playerh + projectiles.get(i).size / 2 && projectiles.get(i).y > y - projectiles.get(i).size / 2 && projectiles.get(i).isEnemy) {
+				projectiles.remove(i);
+				health -= 5;
+				
+			}
 			
 		}
 		
