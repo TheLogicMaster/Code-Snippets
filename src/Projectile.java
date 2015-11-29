@@ -5,7 +5,6 @@ public class Projectile {
 	static double slopex = 0;
 	static double slopey = 0;
 	static double dist = 0;
-	static double angle = 0;
 	static double xvel = 0;
 	static double yvel = 0;
 	static double x = 0;
@@ -17,7 +16,6 @@ public class Projectile {
 		slopex = (mousex - size / 2) - (playerx + DrawGraphics.imgw / 2 - size / 2);
 		slopey = (mousey - 24 - size / 2) - (playery + DrawGraphics.imgh / 2 - size / 2);
 		dist = Math.sqrt(Math.pow(slopex, 2) + Math.pow(slopey, 2));
-		angle = (Math.atan2(mousey, mousex) + Math.atan2(playery, playerx));
 		
 		xvel = slopex / (dist / speed);
 		yvel = slopey / (dist / speed);
