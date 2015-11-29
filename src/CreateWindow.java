@@ -13,7 +13,7 @@ public class CreateWindow {
 		System.out.println(width + ", " + height);
 		frame.setPreferredSize(new Dimension(width, height));
 		
-
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		DrawGraphics drawgraphics = new DrawGraphics();
 		frame.add(drawgraphics);
 		frame.pack();

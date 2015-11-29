@@ -23,7 +23,6 @@ public class towerMain implements Runnable {
 		while (running == true) {
 			
 			if (System.currentTimeMillis() - before >= 17) {
-				System.out.println(System.currentTimeMillis() - before);
 				tick();
 				before = System.currentTimeMillis();
 

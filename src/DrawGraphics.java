@@ -16,17 +16,22 @@ public class DrawGraphics extends JPanel {
 	public static int y  = 0;
 	public static int xvel  = 0;
 	public static int yvel  = 0;
+	public static int imgw = 0;
+	public static int imgh = 0;
 	
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		BufferedImage img = null;
-
+		
 		try {
 			img = ImageIO.read(new File("resources/thing.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
+		imgw = img.getWidth();
+		imgh = img.getHeight();
+		
 		g2d.setColor(new Color(0, 0, 0));
 		g2d.drawLine(300, 0, 300, 1080);
 		g2d.drawImage(img, x, y, null);
@@ -36,6 +41,11 @@ public class DrawGraphics extends JPanel {
 	public void tick() {
 		x  += xvel;
 		y  += yvel;
+		if(x < 0) x = 0;
+		if(x > 1920 - imgw - 1) x = 1920 - imgw  - 1;
+		if(y < 0) y = 0;
+		if(y > 1080 - imgh - 25) y = 1080 - imgh - 25;
+		
 	}
 	
 	public DrawGraphics() {
