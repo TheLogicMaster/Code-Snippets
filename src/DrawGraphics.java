@@ -41,8 +41,8 @@ public class DrawGraphics extends JPanel {
 			e.printStackTrace();
 		}
 		
-		imgw = img.getWidth();
-		imgh = img.getHeight();
+		imgw = img.getWidth() / 2;
+		imgh = img.getHeight() / 2;
 		
 		g2d.setStroke(new BasicStroke(1));
 		g2d.setColor(new Color(0, 0, 35));
