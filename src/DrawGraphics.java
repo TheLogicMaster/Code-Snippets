@@ -22,8 +22,8 @@ public class DrawGraphics extends JPanel {
 	public static int y  = 0;
 	public static int xvel  = 0;
 	public static int yvel  = 0;
-	public static int imgw = 0;
-	public static int imgh = 0;
+	public static int playerw = 0;
+	public static int playerh = 0;
 	public static boolean click = false;
 	public static int mousex = 0;
 	public static int mousey = 0;
@@ -41,14 +41,14 @@ public class DrawGraphics extends JPanel {
 			e.printStackTrace();
 		}
 		
-		imgw = img.getWidth() / 2;
-		imgh = img.getHeight() / 2;
+		playerw = 100;
+		playerh = 100;
 		
-		g2d.setStroke(new BasicStroke(1));
-		g2d.setColor(new Color(0, 0, 35));
-		g2d.fillRect(0, 0, CreateWindow.width, CreateWindow.height);
+		g2d.setStroke(new BasicStroke(3));
 		g2d.setColor(new Color(0, 0, 0));
-		g2d.drawImage(img, x, y, imgw, imgh, null);
+		g2d.fillRect(0, 0, CreateWindow.width, CreateWindow.height);
+		g2d.setColor(new Color(0, 0, 255));
+		g2d.drawRect(x, y, playerw, playerh);
 		g2d.setColor(new Color(0, 0, 255));
 		mousexnow = (int)MouseInfo.getPointerInfo().getLocation().getX();
 		mouseynow = (int)MouseInfo.getPointerInfo().getLocation().getY();
@@ -81,9 +81,9 @@ public class DrawGraphics extends JPanel {
 		x  += xvel;
 		y  += yvel;
 		if(x < 0) x = 0;
-		if(x > CreateWindow.width - imgw - 1) x = CreateWindow.width - imgw  - 1;
+		if(x > CreateWindow.width - playerw - 1) x = CreateWindow.width - playerw  - 1;
 		if(y < 0) y = 0;
-		if(y > CreateWindow.height - imgh - 25) y = CreateWindow.height - imgh - 25;
+		if(y > CreateWindow.height - playerh - 25) y = CreateWindow.height - playerh - 25;
 		
 	}
 	
