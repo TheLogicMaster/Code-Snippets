@@ -1,3 +1,4 @@
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -26,6 +27,8 @@ public class DrawGraphics extends JPanel {
 	public static boolean click = false;
 	public static int mousex = 0;
 	public static int mousey = 0;
+	public static int mousexnow = 0;
+	public static int mouseynow = 0;
 	public static LinkedList<Projectile> projectiles = new LinkedList<Projectile>();
 	
 	public void paintComponent(Graphics g) {
@@ -41,10 +44,16 @@ public class DrawGraphics extends JPanel {
 		imgw = img.getWidth();
 		imgh = img.getHeight();
 		
+		g2d.setStroke(new BasicStroke(1));
 		g2d.setColor(new Color(0, 0, 0));
-		g2d.drawImage(img, x, y, null);
+		g2d.drawImage(img, x, y, imgw, imgh, null);
 		g2d.setColor(new Color(0, 0, 255));
-		g2d.fillRect(mousex - 5, mousey  - 24 - 5, 10, 10);
+		mousexnow = (int)MouseInfo.getPointerInfo().getLocation().getX();
+		mouseynow = (int)MouseInfo.getPointerInfo().getLocation().getY();
+		g2d.setStroke(new BasicStroke(3));
+		g2d.setColor(new Color(0, 0, 0));
+		g2d.drawLine(mousexnow, mouseynow  - 24 - 10, mousexnow, mouseynow  - 24 + 10);
+		g2d.drawLine(mousexnow - 10, mouseynow  - 24, mousexnow + 10, mouseynow  - 24);
 		
 		if(click) {
 			click = false;
@@ -78,6 +87,7 @@ public class DrawGraphics extends JPanel {
 	
 	public DrawGraphics() {
 		requestFocus();
+		
 		KeyListener keylistener = new KeyListener() {
 			public void keyPressed(KeyEvent e) {
 				

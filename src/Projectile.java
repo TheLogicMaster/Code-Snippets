@@ -31,7 +31,7 @@ public class Projectile {
 		g2d.setColor(new Color(255, 0, 0));
 		this.x += this.xvel;
 		this.y += this.yvel;
-		g2d.fillRect((int)this.x, (int)this.y, 50, 50);
+		g2d.fillRect((int)this.x, (int)this.y, (int)size, (int)size);
 		
 	}
 	
