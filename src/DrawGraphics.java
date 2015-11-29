@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -25,7 +26,7 @@ public class DrawGraphics extends JPanel {
 	public static boolean click = false;
 	public static int mousex = 0;
 	public static int mousey = 0;
-	static Projectile projectile = new Projectile();
+	public static LinkedList<Projectile> projectiles = new LinkedList<Projectile>();
 	
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
@@ -47,10 +48,21 @@ public class DrawGraphics extends JPanel {
 		
 		if(click) {
 			click = false;
+			Projectile projectile = new Projectile();
+			projectiles.add(projectile);
 			projectile.spawnProjectile(mousex, mousey, x, y);
 			
 		}
-		projectile.tick(g2d);
+		for(int i = 0; i < projectiles.size(); i++) {
+			if(projectiles.get(i).x < CreateWindow.width + projectiles.get(i).size + 5 && projectiles.get(i).x > 0 - projectiles.get(i).size - 5 && projectiles.get(i).y < CreateWindow.height + projectiles.get(i).size + 5 && projectiles.get(i).y > 0 - projectiles.get(i).size - 5) {
+				projectiles.get(i).tick(g2d);
+				
+			}	else {
+					projectiles.remove(i);
+					
+				}
+			
+		}
 		
 	}
 
