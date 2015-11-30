@@ -38,21 +38,14 @@ public class DrawGraphics extends JPanel {
 	
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		BufferedImage img = null;
 		Font font = null;
 		try {
-			font = Font.createFont(Font.TRUETYPE_FONT, new File("resources/centurygothic.ttf"));
+			font = Font.createFont(Font.TRUETYPE_FONT, towerMain.class.getResourceAsStream("centurygothic.ttf"));
 		}	catch(IOException|FontFormatException e) {
 				
 			}
 		Font font15 = font.deriveFont(Font.PLAIN, 15);
 		Font font25 = font.deriveFont(Font.PLAIN, 25);
-		
-		try {
-			img = ImageIO.read(new File("resources/thing.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
 		playerw = 50;
 		playerh = 50;
@@ -85,6 +78,7 @@ public class DrawGraphics extends JPanel {
 			g2d.drawString("Score: " + score, CreateWindow.width / 2 - 50, CreateWindow.height / 4 + 65);
 		
 		}
+		
 		if(gameover == false) {
 			if(click) {
 				click = false;
@@ -186,11 +180,18 @@ public class DrawGraphics extends JPanel {
 					
 				}
 				
+				if(key == KeyEvent.VK_SPACE) {
+					mousex = (int)MouseInfo.getPointerInfo().getLocation().getX();
+					mousey = (int)MouseInfo.getPointerInfo().getLocation().getY();
+					click = true;
+					
+				}
+				
 			}
 	
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
+				
 				
 			}
 			

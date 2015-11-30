@@ -44,7 +44,6 @@ public class Enemy {
 		
 		x += xvel;
 		y += yvel;
-		System.out.println(xvel + "; " + yvel);
 		
 		if(x <= 0) {
 			x = 0;
