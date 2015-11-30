@@ -9,12 +9,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.LinkedList;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class DrawGraphics extends JPanel {
@@ -34,7 +38,8 @@ public class DrawGraphics extends JPanel {
 	public static LinkedList<Projectile> projectiles = new LinkedList<Projectile>();
 	public static int health = 100;
 	public static int score = 0;
-	public static boolean gameover = false;
+	public static boolean gameover = true;
+	public static int highscore = 10;
 	
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
@@ -68,14 +73,70 @@ public class DrawGraphics extends JPanel {
 		g2d.drawString("Score: " + score, 5, 35);
 		if(health == 0) gameover = true;
 		if(gameover) {
-			g2d.drawLine(1920 / 2, 0, 1920 / 2, 1080);
+			
+/*			BufferedReader reader = null;
+			try {
+				reader = new BufferedReader(new FileReader(new File(towerMain.class.getResource("highscore.txt").toURI())));
+			} catch (FileNotFoundException | URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				StringBuilder sb = new StringBuilder();
+				String line = reader.readLine();
+				
+				while(line != null) {
+					sb.append(line);
+					sb.append(System.lineSeparator());
+					line = reader.readLine();
+					System.out.println(line);
+					
+				}
+			
+				System.out.println(sb.toString());
+//				highscore = Integer.parseInt(sb.toString());
+			
+			}	catch (IOException e) {
+					e.printStackTrace();
+			
+				}	finally {
+					try {
+						reader.close();
+						
+					}	catch (IOException e) {
+						e.printStackTrace();
+						
+						}
+			
+				}
+		
+			if(score > highscore) {
+				try {
+					System.out.println(highscore);
+					File highscoretxt = new File("highscore.txt");
+					
+					BufferedWriter writer = new BufferedWriter(new FileWriter(highscoretxt));
+					
+					System.out.println(highscoretxt.getCanonicalPath());
+					writer.write(Integer.toString(highscore));
+					writer.close();
+				}	catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					}
+				
+			}
+*/				
+
 			g2d.setColor(new Color(0, 0, 0));
 			g2d.fillRect(0, 0, CreateWindow.width, CreateWindow.height);
 			g2d.setColor(new Color(255, 255, 255));
+//			g2d.drawLine(1920 / 2, 0, 1920 / 2, 1080);
 			g2d.setFont(new Font("Impact", Font.PLAIN, 60));
-			g2d.drawString("GAME OVER", CreateWindow.width / 2 - 140, CreateWindow.height / 4);
+			g2d.drawString("GAME OVER", CreateWindow.width / 2 - 133, CreateWindow.height / 4);
 			g2d.setFont(font25);
 			g2d.drawString("Score: " + score, CreateWindow.width / 2 - 50, CreateWindow.height / 4 + 65);
+//			g2d.drawString("High Score: " + highscore, CreateWindow.width / 2 - 70, CreateWindow.height / 4 + 85);
 		
 		}
 		
