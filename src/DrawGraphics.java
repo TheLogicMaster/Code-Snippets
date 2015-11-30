@@ -18,6 +18,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 import javax.swing.JPanel;
 
@@ -36,10 +37,10 @@ public class DrawGraphics extends JPanel {
 	public static int mousexnow = 0;
 	public static int mouseynow = 0;
 	public static LinkedList<Projectile> projectiles = new LinkedList<Projectile>();
-	public static int health = 100;
+	public static int health = 20;
 	public static int score = 0;
 	public static boolean gameover = false;
-	public static int highscore = 10;
+	public static int highscore = 0;
 	
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
@@ -109,11 +110,22 @@ public class DrawGraphics extends JPanel {
 						}
 			
 				}
-		
+*/			
+			try {
+				Scanner in = new Scanner(new FileReader(new File(towerMain.class.getResource("highscore.txt").toURI())));
+				highscore = Integer.parseInt(in.next());
+				System.out.println(highscore);
+				in.close();
+			} catch (FileNotFoundException | URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			if(score > highscore) {
 				try {
+					highscore = score;
 					System.out.println(highscore);
-					File highscoretxt = new File("highscore.txt");
+					File highscoretxt = new File("resources/highscore.txt");
 					
 					BufferedWriter writer = new BufferedWriter(new FileWriter(highscoretxt));
 					
@@ -126,7 +138,6 @@ public class DrawGraphics extends JPanel {
 					}
 				
 			}
-*/				
 
 			g2d.setColor(new Color(0, 0, 0));
 			g2d.fillRect(0, 0, CreateWindow.width, CreateWindow.height);
