@@ -38,7 +38,7 @@ public class DrawGraphics extends JPanel {
 	public static LinkedList<Projectile> projectiles = new LinkedList<Projectile>();
 	public static int health = 100;
 	public static int score = 0;
-	public static boolean gameover = true;
+	public static boolean gameover = false;
 	public static int highscore = 10;
 	
 	public void paintComponent(Graphics g) {
