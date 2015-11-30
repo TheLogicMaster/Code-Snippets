@@ -136,7 +136,7 @@ public class DrawGraphics extends JPanel {
 			g2d.drawString("GAME OVER", CreateWindow.width / 2 - 133, CreateWindow.height / 4);
 			g2d.setFont(font25);
 			g2d.drawString("Score: " + score, CreateWindow.width / 2 - 50, CreateWindow.height / 4 + 65);
-//			g2d.drawString("High Score: " + highscore, CreateWindow.width / 2 - 70, CreateWindow.height / 4 + 85);
+			g2d.drawString("High Score: " + highscore, CreateWindow.width / 2 - 70, CreateWindow.height / 4 + 85);
 		
 		}
 		
