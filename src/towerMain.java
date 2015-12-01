@@ -1,11 +1,10 @@
 
 public class towerMain implements Runnable {
 	static DrawGraphics drawgraphics = new DrawGraphics();
-	static CreateWindow createwindow = new CreateWindow();
 	boolean running = true;
 
 	public static void main(String[] args) {
-		createwindow.makeWindow();
+		CreateWindow.makeWindow();
 		
 		start();
 
@@ -23,7 +22,7 @@ public class towerMain implements Runnable {
 		while (running == true) {
 			
 			if (System.currentTimeMillis() - before >= 17) {
-				if(DrawGraphics.gameover == false) tick();
+				tick();
 				before = System.currentTimeMillis();
 
 			}
@@ -34,7 +33,7 @@ public class towerMain implements Runnable {
 
 	public void tick() {
 		drawgraphics.tick();
-		createwindow.frame.repaint();
+		CreateWindow.frame.repaint();
 
 	}
 

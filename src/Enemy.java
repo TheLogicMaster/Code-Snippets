@@ -20,7 +20,7 @@ public class Enemy {
 		if(shoot == shootlimit) {
 		Projectile projectile = new Projectile();
 		DrawGraphics.projectiles.add(projectile);
-		projectile.spawnProjectile(DrawGraphics.x, DrawGraphics.y, x, y, true);
+		projectile.spawnProjectile(DrawGraphics.x, DrawGraphics.y, x, y, true, "normal");
 		shoot = 0;
 		shootlimit = (int)(Math.random() * 50) + 20;
 		}
@@ -66,6 +66,8 @@ public class Enemy {
 			
 		}
 		
+		x = 500;
+		y = 500;
 	}
 	
 }

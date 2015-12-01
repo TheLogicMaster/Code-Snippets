@@ -9,15 +9,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 import javax.swing.JPanel;
 
@@ -36,10 +35,11 @@ public class DrawGraphics extends JPanel {
 	public static int mousexnow = 0;
 	public static int mouseynow = 0;
 	public static LinkedList<Projectile> projectiles = new LinkedList<Projectile>();
-	public static int health = 100;
+	public static int health = 100000;
 	public static int score = 0;
 	public static boolean gameover = false;
-	public static int highscore = 10;
+	public static int highscore = 0;
+	public static int clickcount = 0;
 	
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
@@ -71,6 +71,7 @@ public class DrawGraphics extends JPanel {
 		g2d.setFont(font15);
 		g2d.drawString("Health: " + health, 5, 20);
 		g2d.drawString("Score: " + score, 5, 35);
+		g2d.drawString("Beta 1.1", 5, CreateWindow.height - 25 - 5);
 		if(health == 0) gameover = true;
 		if(gameover) {
 			
@@ -109,9 +110,20 @@ public class DrawGraphics extends JPanel {
 						}
 			
 				}
-		
+*/
+			try {
+				Scanner in = new Scanner(new FileReader(new File("highscore.txt")));
+				highscore = Integer.parseInt(in.next());
+				System.out.println(highscore);
+				in.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			if(score > highscore) {
 				try {
+					highscore = score;
 					System.out.println(highscore);
 					File highscoretxt = new File("highscore.txt");
 					
@@ -126,27 +138,36 @@ public class DrawGraphics extends JPanel {
 					}
 				
 			}
-*/				
+				
 
 			g2d.setColor(new Color(0, 0, 0));
 			g2d.fillRect(0, 0, CreateWindow.width, CreateWindow.height);
 			g2d.setColor(new Color(255, 255, 255));
 //			g2d.drawLine(1920 / 2, 0, 1920 / 2, 1080);
+			g2d.drawLine(mousexnow, mouseynow  - 24 - 15, mousexnow, mouseynow  - 24 + 15);
+			g2d.drawLine(mousexnow - 15, mouseynow  - 24, mousexnow + 15, mouseynow  - 24);
 			g2d.setFont(new Font("Impact", Font.PLAIN, 60));
 			g2d.drawString("GAME OVER", CreateWindow.width / 2 - 133, CreateWindow.height / 4);
 			g2d.setFont(font25);
 			g2d.drawString("Score: " + score, CreateWindow.width / 2 - 50, CreateWindow.height / 4 + 65);
 			g2d.drawString("High Score: " + highscore, CreateWindow.width / 2 - 70, CreateWindow.height / 4 + 85);
-		
+			g2d.setFont(font15);
+			g2d.drawString("Beta 1.1", 5, CreateWindow.height - 25 - 5);
+			
 		}
 		
 		if(gameover == false) {
 			if(click) {
-				click = false;
-				Projectile projectile = new Projectile();
-				projectiles.add(projectile);
-				projectile.spawnProjectile(mousex, mousey, x, y, false);
-				
+				if(clickcount == 5) {
+					clickcount = 0;
+					mousex = (int)MouseInfo.getPointerInfo().getLocation().x;
+					mousey = (int)MouseInfo.getPointerInfo().getLocation().y;
+					Projectile projectile = new Projectile();
+					projectiles.add(projectile);
+					projectile.spawnProjectile(mousex, mousey, x, y, false, "normal");
+					
+				}
+				clickcount++;
 			}
 			for(int i = 0; i < projectiles.size(); i++) {
 				if(projectiles.get(i).x < CreateWindow.width + projectiles.get(i).size + 5 && projectiles.get(i).x > 0 - projectiles.get(i).size - 5 && projectiles.get(i).y < CreateWindow.height + projectiles.get(i).size + 5 && projectiles.get(i).y > 0 - projectiles.get(i).size - 5) {
@@ -156,14 +177,14 @@ public class DrawGraphics extends JPanel {
 						projectiles.remove(i);
 						
 					}
-				
-				if(projectiles.get(i).x + projectiles.get(i).size / 2 < x + playerw + projectiles.get(i).size / 2 && projectiles.get(i).x + projectiles.get(i).size / 2 > x - projectiles.get(i).size / 2 && projectiles.get(i).y < y + playerh + projectiles.get(i).size / 2 && projectiles.get(i).y > y - projectiles.get(i).size / 2 && projectiles.get(i).isEnemy) {
+						
+				if(projectiles.get(i).x + projectiles.get(i).size / 2 <= x + playerw + projectiles.get(i).size / 2 && projectiles.get(i).x + projectiles.get(i).size / 2 >= x - projectiles.get(i).size / 2 && projectiles.get(i).y <= y + playerh + projectiles.get(i).size / 2 && projectiles.get(i).y >= y - projectiles.get(i).size * .75 && projectiles.get(i).isEnemy) {
 					projectiles.remove(i);
 					health -= 5;
 					
 				}
 				
-				if(projectiles.get(i).x + projectiles.get(i).size / 2 < Enemy.x + Enemy.size + projectiles.get(i).size / 2 && projectiles.get(i).x + projectiles.get(i).size / 2 > Enemy.x - projectiles.get(i).size / 2 && projectiles.get(i).y < Enemy.y + Enemy.size + projectiles.get(i).size / 2 && projectiles.get(i).y > Enemy.y - projectiles.get(i).size / 2 && projectiles.get(i).isEnemy == false) {
+				if(projectiles.get(i).x + projectiles.get(i).size / 2 <= Enemy.x + Enemy.size + projectiles.get(i).size / 2 && projectiles.get(i).x + projectiles.get(i).size / 2 >= Enemy.x - projectiles.get(i).size / 2 && projectiles.get(i).y <= Enemy.y + Enemy.size && projectiles.get(i).y >= Enemy.y - projectiles.get(i).size * .75 && projectiles.get(i).isEnemy == false) {
 					projectiles.remove(i);
 					score += 5;
 					
@@ -241,10 +262,15 @@ public class DrawGraphics extends JPanel {
 					
 				}
 				
+				if(key == KeyEvent.VK_ESCAPE) {
+					CreateWindow.frame.dispose();
+					
+				}
+				
 				if(key == KeyEvent.VK_SPACE) {
-					mousex = (int)MouseInfo.getPointerInfo().getLocation().getX();
-					mousey = (int)MouseInfo.getPointerInfo().getLocation().getY();
-					click = true;
+					Projectile projectile = new Projectile();
+					projectiles.add(projectile);
+					projectile.spawnProjectile(0, 0, 0, 0, false, "orbit");
 					
 				}
 				
@@ -278,15 +304,16 @@ public class DrawGraphics extends JPanel {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
+				clickcount = 5;
+				mousex = (int)MouseInfo.getPointerInfo().getLocation().getX();
+				mousey = (int)MouseInfo.getPointerInfo().getLocation().getY();
+				click = true;
 				
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				mousex = (int)MouseInfo.getPointerInfo().getLocation().getX();
-				mousey = (int)MouseInfo.getPointerInfo().getLocation().getY();
-				click = true;
+				click = false;
 								
 			}
 			
