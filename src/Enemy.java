@@ -36,7 +36,7 @@ public class Enemy {
 		
 		if(yvelcount == yvellimit) {
 			yvelcount = 0;
-			yvel = ((int)(Math.random() * 3) - 1) * 5;
+			yvel = ((int)(Math.random() * 3) - 1) * 10;
 			yvellimit = (int)(Math.random() + 1 * 50);
 			
 		}
@@ -47,27 +47,25 @@ public class Enemy {
 		
 		if(x <= 0) {
 			x = 0;
-			xvel = 5;
+			xvel = 10;
 			
 		}
-		if(x >= CreateWindow.width + 1 - size) {
-			x = CreateWindow.width + 1 - size;
-			xvel = -5;
+		if(x >= CreateWindow.width - 3 - size) {
+			x = CreateWindow.width - 3 - size;
+			xvel = -10;
 			
 		}
 		if(y <= 0) {
 			y = 0;
-			yvel = 5;
+			yvel = 10;
 			
 		}
-		if(y >= CreateWindow.height - 25 - size) {
-			y = CreateWindow.height - 25 - size;
-			yvel = -5;
+		if(y >= CreateWindow.height - 3 - size) {
+			y = CreateWindow.height - 3 - size;
+			yvel = -10;
 			
 		}
 		
-		x = 500;
-		y = 500;
 	}
 	
 }

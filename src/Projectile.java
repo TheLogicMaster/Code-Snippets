@@ -75,8 +75,8 @@ public class Projectile {
 				
 			}	else {
 				
-					this.x = Math.cos(orbitcount) * 100 + DrawGraphics.x + DrawGraphics.playerw / 2 - this.size / 2;
-					this.y = Math.sin(orbitcount) * 100 + DrawGraphics.y + DrawGraphics.playerh / 2 - this.size / 2;
+					this.x = Math.cos(orbitcount) * 300 + DrawGraphics.x + DrawGraphics.playerw / 2 - this.size / 2;
+					this.y = Math.sin(orbitcount) * 300 + DrawGraphics.y + DrawGraphics.playerh / 2 - this.size / 2;
 					this.orbitcount += .1;
 					
 			}

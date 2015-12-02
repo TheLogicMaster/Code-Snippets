@@ -35,11 +35,13 @@ public class DrawGraphics extends JPanel {
 	public static int mousexnow = 0;
 	public static int mouseynow = 0;
 	public static LinkedList<Projectile> projectiles = new LinkedList<Projectile>();
-	public static int health = 100000;
+	public static int health = 100;
 	public static int score = 0;
 	public static boolean gameover = false;
 	public static int highscore = 0;
 	public static int clickcount = 0;
+	public static boolean space = false;
+	public static int spacecount = 0;
 	
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
@@ -69,9 +71,9 @@ public class DrawGraphics extends JPanel {
 		g2d.drawLine(mousexnow, mouseynow  - 24 - 15, mousexnow, mouseynow  - 24 + 15);
 		g2d.drawLine(mousexnow - 15, mouseynow  - 24, mousexnow + 15, mouseynow  - 24);
 		g2d.setFont(font15);
-		g2d.drawString("Health: " + health, 5, 20);
-		g2d.drawString("Score: " + score, 5, 35);
-		g2d.drawString("Beta 1.1", 5, CreateWindow.height - 25 - 5);
+		g2d.drawString("Health: " + health, 5, 15);
+		g2d.drawString("Score: " + score, 5, 30);
+		g2d.drawString("Beta 1.1", 5, CreateWindow.height - 5);
 		if(health == 0) gameover = true;
 		if(gameover) {
 			
@@ -152,7 +154,7 @@ public class DrawGraphics extends JPanel {
 			g2d.drawString("Score: " + score, CreateWindow.width / 2 - 50, CreateWindow.height / 4 + 65);
 			g2d.drawString("High Score: " + highscore, CreateWindow.width / 2 - 70, CreateWindow.height / 4 + 85);
 			g2d.setFont(font15);
-			g2d.drawString("Beta 1.1", 5, CreateWindow.height - 25 - 5);
+			g2d.drawString("Beta 1.2", 5, CreateWindow.height - 5);
 			
 		}
 		
@@ -169,11 +171,25 @@ public class DrawGraphics extends JPanel {
 				}
 				clickcount++;
 			}
+			
+			if(space) {
+				if(spacecount == 3) {
+					spacecount = 0;
+					Projectile projectile = new Projectile();
+					projectiles.add(projectile);
+					projectile.spawnProjectile(0, 0, 0, 0, false, "orbit");
+					
+				}
+				spacecount++;
+			}
+			
 			for(int i = 0; i < projectiles.size(); i++) {
-				if(projectiles.get(i).x < CreateWindow.width + projectiles.get(i).size + 5 && projectiles.get(i).x > 0 - projectiles.get(i).size - 5 && projectiles.get(i).y < CreateWindow.height + projectiles.get(i).size + 5 && projectiles.get(i).y > 0 - projectiles.get(i).size - 5) {
+				if(projectiles.get(i).type.equals("orbit")) projectiles.get(i).tick(g2d);
+				
+				if(projectiles.get(i).x < CreateWindow.width + projectiles.get(i).size + 5 && projectiles.get(i).x > 0 - projectiles.get(i).size - 5 && projectiles.get(i).y < CreateWindow.height + projectiles.get(i).size + 5 && projectiles.get(i).y > 0 - projectiles.get(i).size - 5 && !projectiles.get(i).type.equals("orbit")) {
 					projectiles.get(i).tick(g2d);
 					
-				}	else {
+				}	else if(!projectiles.get(i).type.equals("orbit")){
 						projectiles.remove(i);
 						
 					}
@@ -200,9 +216,9 @@ public class DrawGraphics extends JPanel {
 		x  += xvel;
 		y  += yvel;
 		if(x < 0) x = 0;
-		if(x > CreateWindow.width - playerw - 1) x = CreateWindow.width - playerw  - 1;
-		if(y < 0) y = 0;
-		if(y > CreateWindow.height - playerh - 25) y = CreateWindow.height - playerh - 25;
+		if(x > CreateWindow.width - playerw - 3) x = CreateWindow.width - playerw  - 3;
+		if(y < 1) y = 1;
+		if(y > CreateWindow.height - playerh - 3) y = CreateWindow.height - playerh - 3;
 		
 	}
 	
@@ -233,6 +249,13 @@ public class DrawGraphics extends JPanel {
 				if(key == KeyEvent.VK_DOWN ||key == KeyEvent.VK_S) {
 					DrawGraphics.yvel = 5;
 				
+				}
+				
+				if(key == KeyEvent.VK_SPACE) {
+					spacecount = 3;
+					space = true;
+
+					
 				}
 				
 			}
@@ -268,9 +291,7 @@ public class DrawGraphics extends JPanel {
 				}
 				
 				if(key == KeyEvent.VK_SPACE) {
-					Projectile projectile = new Projectile();
-					projectiles.add(projectile);
-					projectile.spawnProjectile(0, 0, 0, 0, false, "orbit");
+					space = false;
 					
 				}
 				
